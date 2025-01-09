@@ -1,0 +1,26 @@
+.sidebar {
+    margin-top: 10px;
+    border: hsl(0, 0%, 70%) 1px solid;
+    width: 220px;
+    height: auto;
+    box-sizing: border-box;
+}
+
+.sidebar ul {
+    gap: 10px;
+    display: inline-block;
+    width: 170px;
+}
+
+.sidebar li {
+    margin: 5px;
+    padding: 4px;
+    border-radius: 5px;
+    width: 100%;
+    right: 0;
+}
+
+.sidebar li:hover {
+    background-color: hsl(0, 0%, 70%);
+    cursor: pointer;
+}
