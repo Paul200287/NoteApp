@@ -88,11 +88,11 @@ def login(user: User):
 
 
 @app.get("/get-notes")
-def read_user(current_user: dict = Depends(get_current_user)):
+def get_notes(current_user: dict = Depends(get_current_user)):
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    cursor.execute(f"SELECT id, name FROM note")
+    cursor.execute(f"SELECT id, name FROM note WHERE user_id LIKE {current_user["id"]}")
     rows = cursor.fetchall()
     conn.close()
 
@@ -102,7 +102,7 @@ def read_user(current_user: dict = Depends(get_current_user)):
     raise HTTPException(status_code=404, detail="Note not found")
 
 @app.get("/note/{note_id}")
-def read_user(note_id: int, current_user: dict = Depends(get_current_user)):
+def get_note(note_id: int, current_user: dict = Depends(get_current_user)):
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -119,7 +119,7 @@ def create_note(note: Note, current_user: dict = Depends(get_current_user)):
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    cursor.execute("INSERT INTO note (name, text) VALUES (?, ?)", (note.name, note.text))
+    cursor.execute("INSERT INTO note (name, text, user_id) VALUES (?, ?, ?)", (note.name, note.text, current_user["id"]))
     conn.commit()
     conn.close()
 

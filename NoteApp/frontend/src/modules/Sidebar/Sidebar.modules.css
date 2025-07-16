@@ -25,6 +25,7 @@
 
 .sidebar li:hover {
     background-color: hsl(0, 0%, 90%);
+    cursor: pointer;
 }
 
 .delete {

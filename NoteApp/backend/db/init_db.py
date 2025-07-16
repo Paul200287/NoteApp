@@ -10,8 +10,10 @@ def create_database():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS note (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
             name TEXT NOT NULL,
-            text TEXT
+            text TEXT,
+            FOREIGN KEY (user_id) REFERENCES users(id)
         );
     """)
 

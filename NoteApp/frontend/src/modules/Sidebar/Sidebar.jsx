@@ -10,6 +10,7 @@ function Sidebar({ onSidebarNoteClick, refreshSignal }) {
         axios.get("http://localhost:8000/get-notes")
             .then(response => {
                 setNotes(response.data.notes);
+                setError(null);
             })
             .catch(err => {
                 setError("Loading notes failed!");
