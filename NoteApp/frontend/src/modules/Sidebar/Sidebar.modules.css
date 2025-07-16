@@ -8,8 +8,9 @@
 
 .sidebar ul {
     gap: 10px;
-    display: inline-block;
+    display: block;
     width: 170px;
+    padding: 0;
 }
 
 .sidebar li {
@@ -17,10 +18,17 @@
     padding: 4px;
     border-radius: 5px;
     width: 100%;
-    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .sidebar li:hover {
-    background-color: hsl(0, 0%, 70%);
+    background-color: hsl(0, 0%, 90%);
+}
+
+.delete {
+    background: none;
+    border: none;
     cursor: pointer;
 }

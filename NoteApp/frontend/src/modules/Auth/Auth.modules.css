@@ -1,0 +1,20 @@
+.auth {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.auth form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 250px;
+}
+.error {
+  color: red;
+}
+.toggle {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}

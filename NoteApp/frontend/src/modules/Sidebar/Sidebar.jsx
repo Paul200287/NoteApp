@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Sidebar.modules.css';
 
-function Sidebar({ onSidebarNoteClick }) {
+function Sidebar({ onSidebarNoteClick, refreshSignal }) {
     const [notes, setNotes] = useState(null);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
+    const fetchNotes = () => {
         axios.get("http://localhost:8000/get-notes")
             .then(response => {
                 setNotes(response.data.notes);
@@ -15,10 +15,21 @@ function Sidebar({ onSidebarNoteClick }) {
                 setError("Loading notes failed!");
                 console.error(err);
             });
-    }, []);
+    };
+
+    useEffect(() => {
+        fetchNotes();
+    }, [refreshSignal]);
 
     const handleClick = (noteId) => {
         onSidebarNoteClick(noteId);
+    }
+
+    const handleDelete = (noteId) => {
+        axios.delete(`http://localhost:8000/delete-note/${noteId}`)
+            .then(() => {
+                fetchNotes();
+            });
     }
 
     if (error) {
@@ -33,10 +44,9 @@ function Sidebar({ onSidebarNoteClick }) {
         <div className="sidebar">
             <ul>
                 {notes.map((note) => (
-                    <li
-                        key={note.id}
-                        onMouseDown={() => handleClick(note.id)}>
-                        {note.name}
+                    <li key={note.id}>
+                        <span onMouseDown={() => handleClick(note.id)}>{note.name}</span>
+                        <button className='delete' onClick={() => handleDelete(note.id)}>🗑</button>
                     </li>
                 ))}
             </ul>
