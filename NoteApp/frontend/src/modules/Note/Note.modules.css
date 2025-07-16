@@ -9,10 +9,12 @@ textarea {
     font-size: 15px;
     width: 100%;
     box-sizing: border-box;
-    border: none;
+    border: 1px solid hsl(0,0%,80%);
+    border-radius: 4px;
     outline: none;
     resize: none;
     overflow: hidden;
+    padding: 8px;
 }
 
 .info {
@@ -20,3 +22,4 @@ textarea {
     font-size: 1.4em;
     margin: 20px;
 }
+

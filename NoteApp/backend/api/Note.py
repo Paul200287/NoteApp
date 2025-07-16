@@ -12,3 +12,8 @@ class UpdateNote(BaseModel):
 
 class UpdateNoteContent(BaseModel):
     newContent: str
+
+
+class User(BaseModel):
+    username: str
+    password: str

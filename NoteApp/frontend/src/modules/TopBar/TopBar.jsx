@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './TopBar.modules.css'
 
-function TopBar({ onSaveButtonClick }) {
+function TopBar({ onSaveButtonClick, onNewNote, onLogout }) {
     const [saveButtonText, setSaveButtonText] = useState("Save");
+    const [showMenu, setShowMenu] = useState(false);
 
     function handleSaveClick() {
         onSaveButtonClick();
@@ -18,7 +19,13 @@ function TopBar({ onSaveButtonClick }) {
     <div className="topbar">
         <ul>
             <li>
-                <button id='file'>File</button>
+                <button id='file' onClick={() => setShowMenu(!showMenu)}>File</button>
+                {showMenu && (
+                    <div className='menu'>
+                        <button onClick={() => {setShowMenu(false); onNewNote();}}>New Note</button>
+                        <button onClick={onLogout}>Logout</button>
+                    </div>
+                )}
             </li>
             <li>
                 <button
